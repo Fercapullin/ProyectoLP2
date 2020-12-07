@@ -122,6 +122,40 @@ public class MysqlEstudianteDAO implements EstudianteDAO {
 	}
 
 	@Override
+	public String obtenerUltimoCod() {
+		
+		String ultimoCod = "";
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			cn = Mysqlconexion.getConexion();
+			String sql = "SELECT MAX(codEstudiante) FROM tbEstudiante;";
+			pstm = cn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				ultimoCod = rs.getString(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if (pstm != null) pstm.close();
+				if (rs != null) rs.close();
+				if (cn != null) cn.close();
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return ultimoCod;
+	}
+
+	@Override
 	public int actualizarEstudiante(Estudiante obj) {
 		// TODO Auto-generated method stub
 		return 0;

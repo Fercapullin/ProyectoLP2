@@ -23,4 +23,8 @@ public class Estudianteservice {
 	{
 		return objCon.registrarEstudiante(obj);
 	}
+	
+	public String obtenerUltimoCod() {
+		return objCon.obtenerUltimoCod();
+	}
 }

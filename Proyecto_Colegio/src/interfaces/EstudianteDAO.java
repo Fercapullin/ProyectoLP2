@@ -17,5 +17,5 @@ public interface EstudianteDAO {
 	
 	public int eliminarEstudiante( String cod) ;
 	
-	
+	public String obtenerUltimoCod();
 }

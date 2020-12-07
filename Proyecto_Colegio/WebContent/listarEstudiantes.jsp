@@ -43,7 +43,7 @@
 			<td><%= e.getId_grado() %></td>
 			<td colspan="2" align="center">
             <a href="ServletEstudiante?tipo=buscar&cod=<%= e.getCodestudiant() %>">
-            <img title="listar" src="img/edit.gif"></a>
+            <img title="listar" src="img/edit.gif">Ver matrícula</a>
 
 		</tr>
 		<%
