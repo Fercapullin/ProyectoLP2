@@ -2,6 +2,7 @@ package entidad;
 import java.sql.*;
 import modelo.Estudiante;
 import utils.Mysqlconexion;
+import modelo.Detalle_estudiante;
 
 import java.util.*;
 public class ModelEstudiante {
@@ -44,26 +45,27 @@ public class ModelEstudiante {
 		return data;
 	}
 	
-	
-	public Estudiante buscarEstudiante(String cod) {
-		
-		Estudiante es = null;
+	public List<Detalle_estudiante> listado(String cod) {
+		Detalle_estudiante es = null;
+		List<Detalle_estudiante> data = new ArrayList<Detalle_estudiante>();
 		Connection cn = null;
-		PreparedStatement pstm = null;
 		ResultSet rs = null;
+		PreparedStatement pstm = null;
 		try {
 			cn = Mysqlconexion.getConexion();
-			String sql = "select *from tbEstudiante where cod_alu=?";
+			String sql = "{call usp_consulta_matricula(?)}";
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, cod);
 			rs = pstm.executeQuery();
-			if (rs.next()) {
-				es = new Estudiante();
-				es.setCodestudiant(rs.getString(1));
-				es.setNombre(rs.getString(2));
-				es.setApellido(rs.getString(3));
-				es.setDni(rs.getInt(4));
-				es.setId_grado(rs.getString(5));
+			while (rs.next()) {
+				es = new Detalle_estudiante();
+				es.setNro_matri(rs.getString(1));
+				es.setGrado(rs.getString(2));
+				es.setSeccion(rs.getString(3));
+				es.setNombredes(rs.getString(4));
+				es.setCreditos(rs.getString(5));
+				
+				data.add(es);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,7 +81,7 @@ public class ModelEstudiante {
 				e2.printStackTrace();
 			}
 		}
-		return es;
+		return data;
 	}
 	
 	
