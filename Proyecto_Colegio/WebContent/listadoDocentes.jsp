@@ -16,6 +16,25 @@
     <%
         List<Docente> docentes = (List<Docente>) request.getAttribute("docentes");
     %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+	  <a class="navbar-brand" href="#">Navbar</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="#">Colegio<span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="ServletEstudiante?tipo=listar">Estudiantes</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="ServletDocente?tipo=listar">Docentes</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
     <div class="container">
     	<div class="row justify-content-center">
     		<div class="col-12">
@@ -30,7 +49,7 @@
     	</div>
         <div class="row">
             <div class="col-12">
-                <h1>Lista de Docentes</h1>
+                <h1>Docentes</h1>
                 <a class="btn btn-primary rounded" href="registrarDocente.jsp"><i class="fas fa-plus"></i></a>
             </div>            
         </div>
@@ -40,10 +59,11 @@
 				<table class="table text-center">
 					<thead>
 						<tr>
-							<th class="col-3">Código</th>
-							<th class="col-3">DNI</th>
-							<th class="col-3">Nombres y apellidos</th>
-                            <th class="col-3">Acciones</th>
+							<th class="col-2">Código</th>
+							<th class="col-2">DNI</th>
+							<th class="col-4">Nombres y apellidos</th>
+                            <th class="col-2">Acciones</th>
+                            <th class="col-2">Contrato</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -51,10 +71,14 @@
 							<tr>
 								<td><c:out value="${ docente.getCodigo() }"></c:out></td>
 								<td><c:out value="${ docente.getDni() }"></c:out></td>
-								<td><c:out value="${ docente.getNombres() }"></c:out></td>
+								<td><c:out value="${ docente.getNombres() } ${ docente.getApellidos() }"></c:out></td>
 								<td>
                                     <a href="ServletDocente?tipo=actualizar-vista&cod=${ docente.getCodigo() }" class="btn btn-warning rounded-circle"><i class="fas fa-pen-alt"></i></a>
                                     <a href="ServletDocente?tipo=eliminar&cod=${ docente.getCodigo() }" class="btn btn-danger rounded-circle"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                                <td>
+                                	<a href="" class="btn btn-white rounded-circle"><i class="fas fa-file-contract"></i></a>
+                                    <a href="" class="btn btn-white text-dark rounded-circle"><i class="fas fa-file-signature"></i></a>
                                 </td>
 							</tr>
 						</c:forEach>
@@ -62,6 +86,6 @@
 				</table>
 			</div>
 		</div>
-    </div>    
+    </div> 
 </body>
 </html>

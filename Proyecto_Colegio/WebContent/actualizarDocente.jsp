@@ -33,7 +33,7 @@
                 		<label>Apellidos</label>
                 		<input type="text" name="apellidos" value="${ docente.getApellidos() }">
                 	</div>
-                	<button type="submit" class="btn btn-primary">Registrar</button>
+                	<button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
             </div>            
         </div>

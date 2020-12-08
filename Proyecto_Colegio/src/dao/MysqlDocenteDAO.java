@@ -63,9 +63,8 @@ public class MysqlDocenteDAO implements DocenteDAO {
 		
 		try {
 			cn = Mysqlconexion.getConexion();
-			String sql = "SELECT * FROM tbDocente WHERE codDocente=?";
+			String sql = "SELECT * FROM tbDocente WHERE codDocente LIKE '%"+cod+"%'";
 			pstm = cn.prepareStatement(sql);
-			pstm.setString(1, cod);
 			rs = pstm.executeQuery();
 			
 			while(rs.next()) {
